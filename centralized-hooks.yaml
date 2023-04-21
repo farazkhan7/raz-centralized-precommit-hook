@@ -20,10 +20,9 @@ repos:
           #                    ^.*\b(tests)\b.*$
           #                )$
 
-          #          args: ["--line-length=80"]
 #          args: ["--line-length=80"]
   -   repo: https://github.com/pycqa/isort
-      rev: 5.10.1
+      rev: 5.12.0
       hooks:
       -   id: isort
           name: isort (python)
@@ -32,8 +31,15 @@ repos:
       rev: 3.7.9
       hooks:
       - id: flake8
+        args: ["--max-complexity=10"]
   -   repo: https://github.com/pycqa/pylint
-      rev: pylint-2.6.0
+      rev: v3.0.0a6
       hooks:
       -  id: pylint
          args: ["--max-line-length=80", "--disable=E1101,R0912"]
+  -   repo: https://github.com/returntocorp/semgrep
+      rev: 'v1.18.0'
+      hooks:
+      - id: semgrep
+        # See semgrep.dev/rulesets to select a ruleset and copy its URL
+        args: ['--config', 'p/default', '--error']
